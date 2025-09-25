@@ -7,10 +7,7 @@ import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
 import * as FormData from 'form-data';
 
-// Define interfaces for better type safety
-interface WhatsAppMessageResponse {
-  messages?: Array<{ id: string }>;
-}
+
 
 interface WhatsAppSendResponse {
   messages?: Array<{ id: string }>;

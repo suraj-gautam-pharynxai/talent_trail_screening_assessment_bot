@@ -3,18 +3,22 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { WhatsappModule } from './whatsapp/whatsapp.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',        // your DB host
-      port: 5432,               // default Postgres port
-      username: 'postgres',     // your DB username
-      password: 'postgres',     // your DB password
-      database: 'testdb',       // your DB name
-      autoLoadEntities: true,   // auto load entities from modules
-      synchronize: true,        // auto create DB schema (disable in prod!)
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'postgres',
+      database: 'test',
+      autoLoadEntities: true,
+      synchronize: true,
     }),
     WhatsappModule],
   controllers: [AppController],
