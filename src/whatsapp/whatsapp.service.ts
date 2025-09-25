@@ -7,8 +7,6 @@ import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
 import * as FormData from 'form-data';
 
-
-
 interface WhatsAppSendResponse {
   messages?: Array<{ id: string }>;
   // Add other fields as needed
@@ -229,7 +227,7 @@ export class WhatsappService {
           direction: 'outgoing',
           status: MessageStatus.SENT,
           phoneNumber: to,
-          content: message ? `<p class="text-[1.4rem] text-gray-700">${message}</p>` : "",
+          content: message ? `${message}` : "",
           mediaId: uploadedMediaId || "",
           mediaCaption: caption,
           engagementId: user.engagementId || "",

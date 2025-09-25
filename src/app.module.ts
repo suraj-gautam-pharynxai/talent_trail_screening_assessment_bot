@@ -12,10 +12,10 @@ import { ConfigModule } from '@nestjs/config';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: 'dbpharynxai.centralindia.cloudapp.azure.com',
       port: 5432,
-      username: 'postgres',
-      password: 'postgres',
+      username: 'admin',
+      password: 'password',
       database: 'test',
       autoLoadEntities: true,
       synchronize: true,
