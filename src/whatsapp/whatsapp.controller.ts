@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Headers, HttpCode, HttpStatus, Post, Query, Res } from '@nestjs/common';
+import { Body, Controller, Get, Headers, HttpCode, HttpStatus, Post, Query, Req, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { WhatsappService } from './whatsapp.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 const util = require('util');
 
 @Controller('whatsapp')
@@ -28,4 +29,24 @@ export class WhatsappController {
     const data = await this.whatsappService.processMessages(body)
     return res.status(HttpStatus.OK);
   }
+
+
+  @Post('send-message')
+  @UseInterceptors(FileInterceptor('file'))
+  async sendMessage(
+    @UploadedFile() file: Express.Multer.File,
+    @Body() body: any,
+    @Req() req: Request,
+  ) {
+    console.log("send message", body, file)
+    return this.whatsappService.sendMessage(body, file);
+  }
+
+
+
+  // @Post('send-template')
+  // @JwtAuth()
+  // async sendATemplateMessage(@Body() body: any) {
+  //   return this.whatsappService.sendATemplateMessage(body);
+  // }
 }
