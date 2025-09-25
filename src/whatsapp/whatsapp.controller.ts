@@ -25,14 +25,7 @@ export class WhatsappController {
     @Res() res: any
   ) {
     console.log('Facebook request body:', util.inspect(body, { showHidden: false, depth: null, colors: true }));
-    // console.log('Signature:', signature);
-
     const data = await this.whatsappService.processMessages(body)
-    // Validate signature (recommended)
-    // Process message/event
     return res.status(HttpStatus.OK);
   }
-
-
-
 }
