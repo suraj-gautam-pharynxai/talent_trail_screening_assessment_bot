@@ -30,17 +30,12 @@ export class WhatsappService {
 
   async processMessages(body: any) {
     try {
-
       const message = body?.entry?.[0]?.changes?.[0]?.value?.messages?.[0]?.text?.body ||
         body?.entry?.[0]?.changes?.[0]?.value?.messages?.[0]?.interactive?.button_reply?.title ||
         body?.entry?.[0]?.changes?.[0]?.value?.messages?.[0]?.interactive?.list_reply?.title || null;
       const phoneNumberFrom = body?.entry?.[0]?.changes?.[0]?.value?.messages?.[0].from;
       const status = body.entry?.[0]?.changes?.[0]?.value?.statuses?.[0]?.status;
       const id = body.entry?.[0]?.changes?.[0]?.value?.messages?.[0]?.id || body.entry?.[0]?.changes?.[0]?.value?.statuses?.[0]?.id;
-
-
-
-
 
       let room: any = await this.roomsRepository.findOne({
         where: { phoneNumber: phoneNumberFrom?.slice(-10) }
@@ -52,8 +47,6 @@ export class WhatsappService {
         });
 
         if (!findMessage) {
-
-
           await this.messagesRepository.save({
             whatsappMetaId: id,
             roomId: room.id,
